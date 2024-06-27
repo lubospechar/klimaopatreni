@@ -19,6 +19,7 @@ class Group(models.Model):
         return f'{self.localization}: {self.group_name}'
 
     class Meta:
+        unique_together = ('localization', 'group_name')
         verbose_name = "Skupina"
         verbose_name_plural = "Skupiny"
 

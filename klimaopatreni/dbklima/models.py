@@ -23,6 +23,31 @@ class Group(models.Model):
         verbose_name = "Skupina"
         verbose_name_plural = "Skupiny"
 
+class Advantage(models.Model):
+    description = models.CharField(
+        max_length=255,
+        verbose_name='Výhoda',
+    )
+
+    def __str__(self):
+        return self.description
+
+    class Meta:
+        verbose_name = 'Výhoda'
+        verbose_name_plural = 'Výhody'
+
+class Disadvantage(models.Model):
+    description = models.CharField(
+        max_length=255,
+        verbose_name='Nevýhoda',
+    )
+
+    def __str__(self):
+        return self.description
+
+    class Meta:
+        verbose_name = 'Nevýhoda'
+        verbose_name_plural = 'Nevýhody'
 
 class SubGroup(models.Model):
     group = models.ForeignKey(Group, on_delete=models.CASCADE, verbose_name="Skupina")
@@ -38,6 +63,4 @@ class SubGroup(models.Model):
         unique_together = ('group', 'subgroup_name')
         verbose_name = "Podskupina"
         verbose_name_plural = "Podskupiny"
-
-
 

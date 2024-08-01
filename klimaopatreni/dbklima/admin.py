@@ -1,5 +1,5 @@
 from django.contrib import admin
-from dbklima.models import Localization, Group, SubGroup, Advantage, Disadvantage
+from .models import Localization, Group, SubGroup, Advantage, Disadvantage
 
 class GroupInline(admin.TabularInline):
     model = Group
@@ -14,7 +14,6 @@ class SubGroupInline(admin.TabularInline):
 class LocalizationAdmin(admin.ModelAdmin):
     list_display = ('localization_name',)
     inlines = [GroupInline]
-
 
 @admin.register(Group)
 class GroupAdmin(admin.ModelAdmin):
@@ -34,9 +33,11 @@ class SubGroupAdmin(admin.ModelAdmin):
         ('Popis opatření', {
             'fields': ('abstract', 'description')
         }),
+        ('Výhody a Nevýhody', {
+            'fields': ('advantages', 'disadvantages')
+        }),
     )
     ordering = ('group', 'subgroup_name')
-
 
 @admin.register(Advantage)
 class AdvantageAdmin(admin.ModelAdmin):

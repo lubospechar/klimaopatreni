@@ -14,7 +14,6 @@ class Group(models.Model):
     localization = models.ForeignKey(Localization, on_delete=models.CASCADE, verbose_name="Lokalizace")
     group_name = models.CharField(max_length=30, verbose_name="Pojmenování skupiny")
 
-
     def __str__(self):
         return f'{self.localization}: {self.group_name}'
 
@@ -55,6 +54,8 @@ class SubGroup(models.Model):
     code = models.CharField(max_length=10, verbose_name="Kód opatření", unique=True)
     abstract = models.CharField(max_length=255, verbose_name="Shrnutí opatření")
     description = models.TextField(verbose_name="Podrobný popis opatření", blank=False, null=False,)
+    advantages = models.ManyToManyField(Advantage, verbose_name="Výhody")
+    disadvantages = models.ManyToManyField(Disadvantage, verbose_name="Nevýhody")
 
     def __str__(self):
         return f'{self.group}: {self.subgroup_name, self.code}'
@@ -63,4 +64,3 @@ class SubGroup(models.Model):
         unique_together = ('group', 'subgroup_name')
         verbose_name = "Podskupina"
         verbose_name_plural = "Podskupiny"
-

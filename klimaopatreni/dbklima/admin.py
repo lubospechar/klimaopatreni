@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Localization, Group, SubGroup, Advantage, Disadvantage
+from .models import Localization, Group, SubGroup, Advantage, Disadvantage, ChoiceName, Choice
 
 
 class GroupInline(admin.TabularInline):
@@ -54,6 +54,17 @@ class AdvantageAdmin(admin.ModelAdmin):
     verbose_name = "Výhoda"
     verbose_name_plural = "Výhody"
 
+@admin.register(ChoiceName)
+class ChoiceNameAdmin(admin.ModelAdmin):
+    list_display = ('choice_name',)
+    search_fields = ('choice_name',)
+
+@admin.register(Choice)
+class ChoiceAdmin(admin.ModelAdmin):
+    list_display = ('choice_name', 'choice', 'order', 'description')
+    search_fields = ('choice', 'description')
+    list_filter = ('choice_name',)
+
 
 @admin.register(Disadvantage)
 class DisadvantageAdmin(admin.ModelAdmin):
@@ -66,3 +77,5 @@ class DisadvantageAdmin(admin.ModelAdmin):
     )
     verbose_name = "Nevýhoda"
     verbose_name_plural = "Nevýhody"
+
+

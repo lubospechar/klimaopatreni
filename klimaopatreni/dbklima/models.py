@@ -73,7 +73,7 @@ class Choice(models.Model):
     choice_name = models.ForeignKey(ChoiceName, on_delete=models.CASCADE, verbose_name="Název volby")
     choice = models.CharField(max_length=255, verbose_name="Volba")
     order = models.PositiveSmallIntegerField(verbose_name="Pořadí", default=0)
-    description = models.TextField(verbose_name="Popis")
+    description = models.TextField(verbose_name="Popis", null=True, blank=True)
 
     class Meta:
         verbose_name = "Volba"

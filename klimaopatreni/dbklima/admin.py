@@ -54,9 +54,11 @@ class AdvantageAdmin(admin.ModelAdmin):
     verbose_name = "Výhoda"
     verbose_name_plural = "Výhody"
 
+
+
 @admin.register(ChoiceName)
 class ChoiceNameAdmin(admin.ModelAdmin):
-    list_display = ('choice_name',)
+    list_display = ('id', 'choice_name',)
     search_fields = ('choice_name',)
 
 @admin.register(Choice)
@@ -64,6 +66,9 @@ class ChoiceAdmin(admin.ModelAdmin):
     list_display = ('choice_name', 'choice', 'order', 'description')
     search_fields = ('choice', 'description')
     list_filter = ('choice_name',)
+    ordering = ['choice_name', 'order']
+
+
 
 
 @admin.register(Disadvantage)

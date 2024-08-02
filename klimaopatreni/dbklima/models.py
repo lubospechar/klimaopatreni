@@ -56,8 +56,6 @@ class Disadvantage(models.Model):
         verbose_name = "Nevýhoda"
         verbose_name_plural = "Nevýhody"
 
-from django.db import models
-
 class ChoiceName(models.Model):
     choice_name = models.CharField(max_length=255, verbose_name="Název volby")
 

@@ -79,7 +79,7 @@ class Choice(models.Model):
         ordering = ['choice_name', 'order']
 
     def __str__(self):
-        return f"{self.choice_name} - {self.choice}"
+        return f"{self.choice}"
 
 
 
@@ -99,6 +99,8 @@ class SubGroup(models.Model):
     disadvantages = models.ManyToManyField(Disadvantage, verbose_name="Nevýhody")
 
     mix_localization = models.BooleanField(default=False, verbose_name="Přesah lokalizace extravilán - intravilán")
+    env = models.ForeignKey(Choice, on_delete=models.CASCADE, verbose_name="Složka ŽP", limit_choices_to={'choice_name_id': 1}, null=True, blank=True, related_name="envs")
+    env_secondary = models.ManyToManyField(Choice, verbose_name="Složka ŽP (přesah)", limit_choices_to={'choice_name_id': 1}, related_name="envs_sec", blank=True)
 
     def __str__(self):
         return f"{self.group}: {self.subgroup_name, self.code}"

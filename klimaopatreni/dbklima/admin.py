@@ -31,15 +31,26 @@ class GroupAdmin(admin.ModelAdmin):
 
 @admin.register(SubGroup)
 class SubGroupAdmin(admin.ModelAdmin):
-    list_display = ("subgroup_name", "code", "group", "abstract")
+    list_display = ("subgroup_name", "code", "group", "abstract", "env")
     search_fields = ("subgroup_name", "code", "group__group_name")
     list_filter = ("group", "group__localization")
     fieldsets = (
         (None, {"fields": ("group", "subgroup_name", "code")}),
         ("Popis opatření", {"fields": ("abstract", "description")}),
         ("Výhody a Nevýhody", {"fields": ("advantages", "disadvantages")}),
+        ("Složka životního prostředí", {"fields": ("env", "env_secondary", "mix_localization")}),
     )
     ordering = ("group", "subgroup_name")
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "env":
+            kwargs["queryset"] = Choice.objects.filter(choice_name_id=1)
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
+    def formfield_for_manytomany(self, db_field, request, **kwargs):
+        if db_field.name == "env_secondary":
+            kwargs["queryset"] = Choice.objects.filter(choice_name_id=1)
+        return super().formfield_for_manytomany(db_field, request, **kwargs)
 
 
 @admin.register(Advantage)
@@ -82,5 +93,6 @@ class DisadvantageAdmin(admin.ModelAdmin):
     )
     verbose_name = "Nevýhoda"
     verbose_name_plural = "Nevýhody"
+
 
 

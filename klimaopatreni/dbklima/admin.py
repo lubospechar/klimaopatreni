@@ -39,6 +39,7 @@ class SubGroupAdmin(admin.ModelAdmin):
         ("Popis opatření", {"fields": ("abstract", "description")}),
         ("Výhody a Nevýhody", {"fields": ("advantages", "disadvantages")}),
         ("Složka životního prostředí", {"fields": ("env", "env_secondary", "mix_localization")}),
+        ("Potenciál realizovatelnosti", {"fields": ("potential", "size", "difficulty_of_implementation", "conditions_for_implementation")}),
     )
     ordering = ("group", "subgroup_name")
 

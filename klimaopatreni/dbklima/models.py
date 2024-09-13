@@ -102,6 +102,15 @@ class SubGroup(models.Model):
     env = models.ForeignKey(Choice, on_delete=models.CASCADE, verbose_name="Složka ŽP", limit_choices_to={'choice_name_id': 1}, related_name="envs")
     env_secondary = models.ManyToManyField(Choice, verbose_name="Složka ŽP (přesah)", limit_choices_to={'choice_name_id': 1}, related_name="envs_sec", blank=True)
 
+    potential = models.ForeignKey(Choice, verbose_name="Potenciál aplikace", limit_choices_to={'choice_name_id': 2}, related_name="potentials", on_delete=models.CASCADE, null=True)
+    size = models.ForeignKey(Choice, verbose_name="Rozsah / velikost", limit_choices_to={'choice_name_id': 3}, related_name="sizes", on_delete=models.CASCADE, null=True)
+    difficulty_of_implementation = models.ForeignKey(Choice, verbose_name="Náročnost realizace", limit_choices_to={'choice_name_id': 4}, related_name="difficulty_of_implementations", on_delete=models.CASCADE, null=True)
+    conditions_for_implementation = models.TextField(
+        verbose_name="Podmínky implementace",
+        null=True,
+        blank=False
+    )
+
     def __str__(self):
         return f"{self.group}: {self.subgroup_name, self.code}"
 

@@ -56,6 +56,7 @@ class Disadvantage(models.Model):
         verbose_name = "Nevýhoda"
         verbose_name_plural = "Nevýhody"
 
+
 class ChoiceName(models.Model):
     choice_name = models.CharField(max_length=255, verbose_name="Název volby")
 
@@ -68,7 +69,9 @@ class ChoiceName(models.Model):
 
 
 class Choice(models.Model):
-    choice_name = models.ForeignKey(ChoiceName, on_delete=models.CASCADE, verbose_name="Název volby")
+    choice_name = models.ForeignKey(
+        ChoiceName, on_delete=models.CASCADE, verbose_name="Název volby"
+    )
     choice = models.CharField(max_length=255, verbose_name="Volba")
     order = models.PositiveSmallIntegerField(verbose_name="Pořadí", default=0)
     description = models.TextField(verbose_name="Popis", null=True, blank=True)
@@ -76,11 +79,10 @@ class Choice(models.Model):
     class Meta:
         verbose_name = "Volba"
         verbose_name_plural = "Volby"
-        ordering = ['choice_name', 'order']
+        ordering = ["choice_name", "order"]
 
     def __str__(self):
         return f"{self.choice}"
-
 
 
 class SubGroup(models.Model):
@@ -98,17 +100,50 @@ class SubGroup(models.Model):
     advantages = models.ManyToManyField(Advantage, verbose_name="Výhody")
     disadvantages = models.ManyToManyField(Disadvantage, verbose_name="Nevýhody")
 
-    mix_localization = models.BooleanField(default=False, verbose_name="Přesah lokalizace extravilán - intravilán")
-    env = models.ForeignKey(Choice, on_delete=models.CASCADE, verbose_name="Složka ŽP", limit_choices_to={'choice_name_id': 1}, related_name="envs")
-    env_secondary = models.ManyToManyField(Choice, verbose_name="Složka ŽP (přesah)", limit_choices_to={'choice_name_id': 1}, related_name="envs_sec", blank=True)
+    mix_localization = models.BooleanField(
+        default=False, verbose_name="Přesah lokalizace extravilán - intravilán"
+    )
+    env = models.ForeignKey(
+        Choice,
+        on_delete=models.CASCADE,
+        verbose_name="Složka ŽP",
+        limit_choices_to={"choice_name_id": 1},
+        related_name="envs",
+    )
+    env_secondary = models.ManyToManyField(
+        Choice,
+        verbose_name="Složka ŽP (přesah)",
+        limit_choices_to={"choice_name_id": 1},
+        related_name="envs_sec",
+        blank=True,
+    )
 
-    potential = models.ForeignKey(Choice, verbose_name="Potenciál aplikace", limit_choices_to={'choice_name_id': 2}, related_name="potentials", on_delete=models.CASCADE, null=True)
-    size = models.ForeignKey(Choice, verbose_name="Rozsah / velikost", limit_choices_to={'choice_name_id': 3}, related_name="sizes", on_delete=models.CASCADE, null=True)
-    difficulty_of_implementation = models.ForeignKey(Choice, verbose_name="Náročnost realizace", limit_choices_to={'choice_name_id': 4}, related_name="difficulty_of_implementations", on_delete=models.CASCADE, null=True)
-    conditions_for_implementation = models.TextField(
-        verbose_name="Podmínky implementace",
+    potential = models.ForeignKey(
+        Choice,
+        verbose_name="Potenciál aplikace",
+        limit_choices_to={"choice_name_id": 2},
+        related_name="potentials",
+        on_delete=models.CASCADE,
         null=True,
-        blank=False
+    )
+    size = models.ForeignKey(
+        Choice,
+        verbose_name="Rozsah / velikost",
+        limit_choices_to={"choice_name_id": 3},
+        related_name="sizes",
+        on_delete=models.CASCADE,
+        null=True,
+    )
+    difficulty_of_implementation = models.ForeignKey(
+        Choice,
+        verbose_name="Náročnost realizace",
+        limit_choices_to={"choice_name_id": 4},
+        related_name="difficulty_of_implementations",
+        on_delete=models.CASCADE,
+        null=True,
+    )
+    conditions_for_implementation = models.TextField(
+        verbose_name="Podmínky implementace", null=True, blank=False
     )
 
     def __str__(self):
@@ -118,5 +153,3 @@ class SubGroup(models.Model):
         unique_together = ("group", "subgroup_name")
         verbose_name = "Podskupina"
         verbose_name_plural = "Podskupiny"
-
-

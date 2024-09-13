@@ -1,5 +1,13 @@
 from django.contrib import admin
-from .models import Localization, Group, SubGroup, Advantage, Disadvantage, ChoiceName, Choice
+from .models import (
+    Localization,
+    Group,
+    SubGroup,
+    Advantage,
+    Disadvantage,
+    ChoiceName,
+    Choice,
+)
 
 
 class GroupInline(admin.TabularInline):
@@ -38,8 +46,21 @@ class SubGroupAdmin(admin.ModelAdmin):
         (None, {"fields": ("group", "subgroup_name", "code")}),
         ("Popis opatření", {"fields": ("abstract", "description")}),
         ("Výhody a Nevýhody", {"fields": ("advantages", "disadvantages")}),
-        ("Složka životního prostředí", {"fields": ("env", "env_secondary", "mix_localization")}),
-        ("Potenciál realizovatelnosti", {"fields": ("potential", "size", "difficulty_of_implementation", "conditions_for_implementation")}),
+        (
+            "Složka životního prostředí",
+            {"fields": ("env", "env_secondary", "mix_localization")},
+        ),
+        (
+            "Potenciál realizovatelnosti",
+            {
+                "fields": (
+                    "potential",
+                    "size",
+                    "difficulty_of_implementation",
+                    "conditions_for_implementation",
+                )
+            },
+        ),
     )
     ordering = ("group", "subgroup_name")
 
@@ -67,20 +88,21 @@ class AdvantageAdmin(admin.ModelAdmin):
     verbose_name_plural = "Výhody"
 
 
-
 @admin.register(ChoiceName)
 class ChoiceNameAdmin(admin.ModelAdmin):
-    list_display = ('id', 'choice_name',)
-    search_fields = ('choice_name',)
+    list_display = (
+        "id",
+        "choice_name",
+    )
+    search_fields = ("choice_name",)
+
 
 @admin.register(Choice)
 class ChoiceAdmin(admin.ModelAdmin):
-    list_display = ('choice_name', 'choice', 'order', 'description')
-    search_fields = ('choice', 'description')
-    list_filter = ('choice_name',)
-    ordering = ['choice_name', 'order']
-
-
+    list_display = ("choice_name", "choice", "order", "description")
+    search_fields = ("choice", "description")
+    list_filter = ("choice_name",)
+    ordering = ["choice_name", "order"]
 
 
 @admin.register(Disadvantage)
@@ -94,6 +116,3 @@ class DisadvantageAdmin(admin.ModelAdmin):
     )
     verbose_name = "Nevýhoda"
     verbose_name_plural = "Nevýhody"
-
-
-

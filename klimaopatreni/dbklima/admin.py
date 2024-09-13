@@ -65,6 +65,10 @@ class SubGroupAdmin(admin.ModelAdmin):
             "Účinnost",
             {"fields": ("quantification", "time_horizon")},
         ),
+        (
+            "Interakce s dalšími opatřeními",
+            {"fields": ("related", "conflict", "other_conflict")}
+        )
     )
     ordering = ("group", "subgroup_name")
 

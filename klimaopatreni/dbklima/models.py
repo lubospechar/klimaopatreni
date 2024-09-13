@@ -164,6 +164,19 @@ class SubGroup(models.Model):
         null=True,
     )
 
+    related = models.ManyToManyField('self', blank=True, verbose_name="Návaznost")
+
+    conflict = models.ManyToManyField(
+        Choice,
+        verbose_name="Střet",
+        limit_choices_to={"choice_name_id": 7},
+        related_name="conflicts",
+        blank=True,
+    )
+
+    other_conflict = models.CharField(max_length=255, verbose_name="Jiné střety", null=True, blank=True)
+
+
     def __str__(self):
         return f"{self.group}: {self.subgroup_name, self.code}"
 

@@ -146,6 +146,24 @@ class SubGroup(models.Model):
         verbose_name="Podmínky implementace", null=True, blank=False
     )
 
+    quantification = models.ForeignKey(
+        Choice,
+        verbose_name="Kvantifikace dopadu",
+        limit_choices_to={"choice_name_id": 5},
+        related_name="quantifications",
+        on_delete=models.CASCADE,
+        null=True,
+    )
+
+    time_horizon = models.ForeignKey(
+        Choice,
+        verbose_name="Časový horizont dopadu",
+        limit_choices_to={"choice_name_id": 6},
+        related_name="time_horizons",
+        on_delete=models.CASCADE,
+        null=True,
+    )
+
     def __str__(self):
         return f"{self.group}: {self.subgroup_name, self.code}"
 

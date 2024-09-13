@@ -61,6 +61,10 @@ class SubGroupAdmin(admin.ModelAdmin):
                 )
             },
         ),
+        (
+            "Účinnost",
+            {"fields": ("quantification", "time_horizon")},
+        ),
     )
     ordering = ("group", "subgroup_name")
 

@@ -197,6 +197,15 @@ class SubGroup(models.Model):
 
     other_conflict = models.CharField(max_length=255, verbose_name="Jiné střety", null=True, blank=True)
 
+    tag = models.ForeignKey(TagDetail, verbose_name="Kategorie dopadu změny klimatu", on_delete=models.CASCADE, null=True)
+
+    sdg = models.ManyToManyField(
+        Choice,
+        verbose_name="Cíle udržitelného rozvoje (SDG)",
+        limit_choices_to={"choice_name_id": 10},
+        related_name="sdgs",
+        blank=True,
+    )
 
     def __str__(self):
         return f"{self.group}: {self.subgroup_name, self.code}"

@@ -70,7 +70,11 @@ class SubGroupAdmin(admin.ModelAdmin):
         (
             "Interakce s dalšími opatřeními",
             {"fields": ("related", "conflict", "other_conflict")}
-        )
+        ),
+        (
+            "Dopady",
+            {"fields": ("tag", "sdg")}
+        ),
     )
     ordering = ("group", "subgroup_name")
 

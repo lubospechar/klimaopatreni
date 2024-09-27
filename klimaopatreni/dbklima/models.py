@@ -208,7 +208,7 @@ class SubGroup(models.Model):
     )
 
     price = models.PositiveIntegerField(verbose_name="Hodnota", default=0)
-    quantification = models.ForeignKey(
+    unit = models.ForeignKey(
         Choice,
         verbose_name="Jednotka",
         limit_choices_to={"choice_name_id": 11},

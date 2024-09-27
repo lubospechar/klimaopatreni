@@ -95,16 +95,20 @@ class Tag(models.Model):
     def __str__(self):
         return self.tag_name
 
+
 class TagDetail(models.Model):
-    tag = models.ForeignKey(Tag, verbose_name="Kategorie dopadu změny klimatu", on_delete=models.CASCADE)
+    tag = models.ForeignKey(
+        Tag, verbose_name="Kategorie dopadu změny klimatu", on_delete=models.CASCADE
+    )
     tag_detail = models.CharField(verbose_name="Specifický dopad", max_length=100)
 
     class Meta:
-        verbose_name="Kategorie dopadu změny klimatu (Specifický dopad)"
+        verbose_name = "Kategorie dopadu změny klimatu (Specifický dopad)"
         verbose_name_plural = "Kategorie dopadu změny klimatu (Specifické dopady)"
 
     def __str__(self):
-        return f'{self.tag.tag_name} - {self.tag_detail}'
+        return f"{self.tag.tag_name} - {self.tag_detail}"
+
 
 class SubGroup(models.Model):
     group = models.ForeignKey(Group, on_delete=models.CASCADE, verbose_name="Skupina")
@@ -185,7 +189,7 @@ class SubGroup(models.Model):
         null=True,
     )
 
-    related = models.ManyToManyField('self', blank=True, verbose_name="Návaznost")
+    related = models.ManyToManyField("self", blank=True, verbose_name="Návaznost")
 
     conflict = models.ManyToManyField(
         Choice,
@@ -195,9 +199,16 @@ class SubGroup(models.Model):
         blank=True,
     )
 
-    other_conflict = models.CharField(max_length=255, verbose_name="Jiné střety", null=True, blank=True)
+    other_conflict = models.CharField(
+        max_length=255, verbose_name="Jiné střety", null=True, blank=True
+    )
 
-    tag = models.ForeignKey(TagDetail, verbose_name="Kategorie dopadu změny klimatu", on_delete=models.CASCADE, null=True)
+    tag = models.ForeignKey(
+        TagDetail,
+        verbose_name="Kategorie dopadu změny klimatu",
+        on_delete=models.CASCADE,
+        null=True,
+    )
 
     sdg = models.ManyToManyField(
         Choice,
@@ -217,7 +228,9 @@ class SubGroup(models.Model):
         null=True,
     )
 
-    comment = models.CharField(max_length=255, verbose_name="Komentář", null=True, blank=True)
+    comment = models.CharField(
+        max_length=255, verbose_name="Komentář", null=True, blank=True
+    )
 
     def __str__(self):
         return f"{self.group}: {self.subgroup_name, self.code}"
@@ -236,15 +249,19 @@ class Example(models.Model):
         (3, "v rámci DIVILAND"),
     )
 
-    subgroup = models.ForeignKey(SubGroup, verbose_name="Podskupina", on_delete=models.CASCADE)
+    subgroup = models.ForeignKey(
+        SubGroup, verbose_name="Podskupina", on_delete=models.CASCADE
+    )
     example_name = models.CharField(verbose_name="Název", max_length=100)
     description = models.TextField(verbose_name="Popis")
     web = models.URLField(verbose_name="Odkaz na www")
-    location = models.PositiveSmallIntegerField(choices=LOCATION_CHOICES, verbose_name="Lokace")
+    location = models.PositiveSmallIntegerField(
+        choices=LOCATION_CHOICES, verbose_name="Lokace"
+    )
 
     class Meta:
         verbose_name = "Realizováno (příklad)"
         verbose_name_plural = "Realizováno (příklady)"
 
     def __str__(self):
-        return f'{self.subgroup} - {self.example_name}'
+        return f"{self.subgroup} - {self.example_name}"

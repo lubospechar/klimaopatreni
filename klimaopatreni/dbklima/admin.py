@@ -9,7 +9,7 @@ from .models import (
     Choice,
     Tag,
     TagDetail,
-    Example
+    Example,
 )
 
 
@@ -28,6 +28,7 @@ class ExampleInline(admin.StackedInline):
     model = Example
     extra = 2
 
+
 @admin.register(Localization)
 class LocalizationAdmin(admin.ModelAdmin):
     list_display = ("localization_name",)
@@ -43,10 +44,18 @@ class GroupAdmin(admin.ModelAdmin):
     list_filter = ("localization",)
     inlines = [SubGroupInline]
 
+
 @admin.register(Example)
 class ExampleAdmin(admin.ModelAdmin):
-    list_display = ('subgroup', 'example_name', 'description', 'web', 'location',)
-    list_filter = ('location',)
+    list_display = (
+        "subgroup",
+        "example_name",
+        "description",
+        "web",
+        "location",
+    )
+    list_filter = ("location",)
+
 
 @admin.register(SubGroup)
 class SubGroupAdmin(admin.ModelAdmin):
@@ -78,19 +87,24 @@ class SubGroupAdmin(admin.ModelAdmin):
         ),
         (
             "Interakce s dalšími opatřeními",
-            {"fields": ("related", "conflict", "other_conflict")}
+            {"fields": ("related", "conflict", "other_conflict")},
         ),
-        (
-            "Dopady",
-            {"fields": ("tag", "sdg")}
-        ),
+        ("Dopady", {"fields": ("tag", "sdg")}),
         (
             "Cena",
-            {"fields": ("price", "unit", 'comment',)}
+            {
+                "fields": (
+                    "price",
+                    "unit",
+                    "comment",
+                )
+            },
         ),
     )
     ordering = ("group", "subgroup_name")
-    inlines = [ExampleInline, ]
+    inlines = [
+        ExampleInline,
+    ]
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == "env":
@@ -149,6 +163,7 @@ class DisadvantageAdmin(admin.ModelAdmin):
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
     list_display = ("tag_name",)
+
 
 @admin.register(TagDetail)
 class TagDetailAdmin(admin.ModelAdmin):

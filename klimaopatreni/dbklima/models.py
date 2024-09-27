@@ -217,6 +217,8 @@ class SubGroup(models.Model):
         null=True,
     )
 
+    comment = models.CharField(max_length=255, verbose_name="Komentář", null=True, blank=True)
+
     def __str__(self):
         return f"{self.group}: {self.subgroup_name, self.code}"
 
@@ -224,3 +226,25 @@ class SubGroup(models.Model):
         unique_together = ("group", "subgroup_name")
         verbose_name = "Podskupina"
         verbose_name_plural = "Podskupiny"
+
+
+class Example(models.Model):
+
+    LOCATION_CHOICES = (
+        (1, "v ČR"),
+        (2, "v zahraničí"),
+        (3, "v rámci DIVILAND"),
+    )
+
+    subgroup = models.ForeignKey(SubGroup, verbose_name="Podskupina", on_delete=models.CASCADE)
+    example_name = models.CharField(verbose_name="Název", max_length=100)
+    description = models.TextField(verbose_name="Popis")
+    web = models.URLField(verbose_name="Odkaz na www")
+    location = models.PositiveSmallIntegerField(choices=LOCATION_CHOICES, verbose_name="Lokace")
+
+    class Meta:
+        verbose_name = "Realizováno (příklad)"
+        verbose_name_plural = "Realizováno (příklady)"
+
+    def __str__(self):
+        return f'{self.subgroup} - {self.example_name}'

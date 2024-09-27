@@ -9,6 +9,7 @@ from .models import (
     Choice,
     Tag,
     TagDetail,
+    Example
 )
 
 
@@ -22,6 +23,10 @@ class SubGroupInline(admin.TabularInline):
     extra = 2
     fields = ("subgroup_name", "code", "abstract", "description")
 
+
+class ExampleInline(admin.StackedInline):
+    model = Example
+    extra = 2
 
 @admin.register(Localization)
 class LocalizationAdmin(admin.ModelAdmin):
@@ -38,6 +43,10 @@ class GroupAdmin(admin.ModelAdmin):
     list_filter = ("localization",)
     inlines = [SubGroupInline]
 
+@admin.register(Example)
+class ExampleAdmin(admin.ModelAdmin):
+    list_display = ('subgroup', 'example_name', 'description', 'web', 'location',)
+    list_filter = ('location',)
 
 @admin.register(SubGroup)
 class SubGroupAdmin(admin.ModelAdmin):
@@ -77,10 +86,11 @@ class SubGroupAdmin(admin.ModelAdmin):
         ),
         (
             "Cena",
-            {"fields": ("price", "unit")}
+            {"fields": ("price", "unit", 'comment',)}
         ),
     )
     ordering = ("group", "subgroup_name")
+    inlines = [ExampleInline, ]
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == "env":

@@ -85,6 +85,16 @@ class Choice(models.Model):
         return f"{self.choice}"
 
 
+class Tag(models.Model):
+    tag_name = models.CharField(verbose_name="Tag", max_length=50)
+
+    class Meta:
+        verbose_name = "TAG"
+        verbose_name_plural = "TAG"
+
+    def __str__(self):
+        return self.tag_name
+
 class SubGroup(models.Model):
     group = models.ForeignKey(Group, on_delete=models.CASCADE, verbose_name="Skupina")
     subgroup_name = models.CharField(

@@ -7,6 +7,7 @@ from .models import (
     Disadvantage,
     ChoiceName,
     Choice,
+    Tag,
 )
 
 
@@ -124,3 +125,8 @@ class DisadvantageAdmin(admin.ModelAdmin):
     )
     verbose_name = "Nevýhoda"
     verbose_name_plural = "Nevýhody"
+
+
+@admin.register(Tag)
+class TagAdmin(admin.ModelAdmin):
+    list_display = ("tag_name",)

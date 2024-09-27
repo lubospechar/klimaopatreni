@@ -86,14 +86,25 @@ class Choice(models.Model):
 
 
 class Tag(models.Model):
-    tag_name = models.CharField(verbose_name="Tag", max_length=50)
+    tag_name = models.CharField(verbose_name="Kategorie", max_length=50)
 
     class Meta:
-        verbose_name = "TAG"
-        verbose_name_plural = "TAG"
+        verbose_name = "Kategorie dopadu změny klimatu"
+        verbose_name_plural = "Kategorie dopadu změny klimatu"
 
     def __str__(self):
         return self.tag_name
+
+class TagDetail(models.Model):
+    tag = models.ForeignKey(Tag, verbose_name="Kategorie dopadu změny klimatu", on_delete=models.CASCADE)
+    tag_detail = models.CharField(verbose_name="Specifický dopad", max_length=100)
+
+    class Meta:
+        verbose_name="Kategorie dopadu změny klimatu (Specifický dopad)"
+        verbose_name_plural = "Kategorie dopadu změny klimatu (Specifické dopady)"
+
+    def __str__(self):
+        return f'{self.tag.tag_name} - {self.tag_detail}'
 
 class SubGroup(models.Model):
     group = models.ForeignKey(Group, on_delete=models.CASCADE, verbose_name="Skupina")

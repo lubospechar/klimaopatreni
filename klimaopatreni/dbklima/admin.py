@@ -8,6 +8,7 @@ from .models import (
     ChoiceName,
     Choice,
     Tag,
+    TagDetail,
 )
 
 
@@ -130,3 +131,8 @@ class DisadvantageAdmin(admin.ModelAdmin):
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
     list_display = ("tag_name",)
+
+@admin.register(TagDetail)
+class TagDetailAdmin(admin.ModelAdmin):
+    list_display = ("tag", "tag_detail")
+    list_filter = ("tag",)

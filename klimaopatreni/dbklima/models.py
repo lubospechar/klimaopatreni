@@ -207,6 +207,16 @@ class SubGroup(models.Model):
         blank=True,
     )
 
+    price = models.PositiveIntegerField(verbose_name="Hodnota", default=0)
+    quantification = models.ForeignKey(
+        Choice,
+        verbose_name="Jednotka",
+        limit_choices_to={"choice_name_id": 11},
+        related_name="units",
+        on_delete=models.CASCADE,
+        null=True,
+    )
+
     def __str__(self):
         return f"{self.group}: {self.subgroup_name, self.code}"
 

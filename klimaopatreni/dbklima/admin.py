@@ -75,6 +75,10 @@ class SubGroupAdmin(admin.ModelAdmin):
             "Dopady",
             {"fields": ("tag", "sdg")}
         ),
+        (
+            "Cena",
+            {"fields": ("price", "unit")}
+        ),
     )
     ordering = ("group", "subgroup_name")
 

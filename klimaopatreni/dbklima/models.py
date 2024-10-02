@@ -143,6 +143,11 @@ class SubGroup(models.Model):
         blank=True,
     )
 
+    env_desc = models.TextField(
+        verbose_name="Složka ŽP (přesah) - poznánka",
+        blank=True, null=True
+    )
+
     potential = models.ForeignKey(
         Choice,
         verbose_name="Potenciál aplikace",
@@ -209,6 +214,12 @@ class SubGroup(models.Model):
         on_delete=models.CASCADE,
         null=True,
     )
+
+    tag_desc = models.TextField(
+        verbose_name="Kategorie dopadu změny klimatu - poznánka",
+        blank=True, null=True
+    )
+
 
     sdg = models.ManyToManyField(
         Choice,

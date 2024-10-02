@@ -68,7 +68,7 @@ class SubGroupAdmin(admin.ModelAdmin):
         ("Výhody a Nevýhody", {"fields": ("advantages", "disadvantages")}),
         (
             "Složka životního prostředí",
-            {"fields": ("env", "env_secondary", "mix_localization")},
+            {"fields": ("env", "env_secondary", "env_desc", "mix_localization")},
         ),
         (
             "Potenciál realizovatelnosti",
@@ -89,7 +89,7 @@ class SubGroupAdmin(admin.ModelAdmin):
             "Interakce s dalšími opatřeními",
             {"fields": ("related", "conflict", "other_conflict")},
         ),
-        ("Dopady", {"fields": ("tag", "sdg")}),
+        ("Dopady", {"fields": ("tag", "tag_desc", "sdg")}),
         (
             "Cena",
             {

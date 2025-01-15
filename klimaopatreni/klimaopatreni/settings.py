@@ -8,12 +8,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = config("DEBUG", default=False, cast=bool)
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='').split(',')
+ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="").split(",")
 
 # Application definition
 
@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "rest_framework",
     "dbklima",
 ]
 
@@ -62,8 +63,8 @@ WSGI_APPLICATION = "klimaopatreni.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": config('DATABASE_ENGINE'),
-        "NAME": BASE_DIR / config('DATABASE_NAME')
+        "ENGINE": config("DATABASE_ENGINE"),
+        "NAME": BASE_DIR / config("DATABASE_NAME"),
     }
 }
 
@@ -88,9 +89,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = config('LANGUAGE_CODE')
+LANGUAGE_CODE = config("LANGUAGE_CODE")
 
-TIME_ZONE = config('TIME_ZONE')
+TIME_ZONE = config("TIME_ZONE")
 
 USE_I18N = True
 
@@ -100,7 +101,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = "static/"
-STATIC_ROOT = config('STATIC_ROOT')
+STATIC_ROOT = config("STATIC_ROOT")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

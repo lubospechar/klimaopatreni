@@ -6,30 +6,52 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dbklima', '0004_alter_group_unique_together'),
+        ("dbklima", "0004_alter_group_unique_together"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Advantage',
+            name="Advantage",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('description', models.CharField(max_length=255, verbose_name='Výhoda')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "description",
+                    models.CharField(max_length=255, verbose_name="Výhoda"),
+                ),
             ],
             options={
-                'verbose_name': 'Výhoda',
-                'verbose_name_plural': 'Výhody',
+                "verbose_name": "Výhoda",
+                "verbose_name_plural": "Výhody",
             },
         ),
         migrations.CreateModel(
-            name='Disadvantage',
+            name="Disadvantage",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('description', models.CharField(max_length=255, verbose_name='Nevýhoda')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "description",
+                    models.CharField(max_length=255, verbose_name="Nevýhoda"),
+                ),
             ],
             options={
-                'verbose_name': 'Nevýhoda',
-                'verbose_name_plural': 'Nevýhody',
+                "verbose_name": "Nevýhoda",
+                "verbose_name_plural": "Nevýhody",
             },
         ),
     ]

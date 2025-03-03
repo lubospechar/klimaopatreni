@@ -89,7 +89,7 @@ class SubGroupAdmin(admin.ModelAdmin):
             "Interakce s dalšími opatřeními",
             {"fields": ("related", "conflict", "other_conflict")},
         ),
-        ("Dopady", {"fields": ("tag", "tag_desc", "sdg")}),
+        ("Dopady", {"fields": ("tag", "other_tags", "tag_desc", "sdg")}),
         (
             "Cena",
             {

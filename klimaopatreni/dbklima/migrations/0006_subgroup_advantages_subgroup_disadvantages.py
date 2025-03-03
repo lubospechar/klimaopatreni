@@ -6,18 +6,20 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dbklima', '0005_advantage_disadvantage'),
+        ("dbklima", "0005_advantage_disadvantage"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='subgroup',
-            name='advantages',
-            field=models.ManyToManyField(to='dbklima.advantage', verbose_name='Výhody'),
+            model_name="subgroup",
+            name="advantages",
+            field=models.ManyToManyField(to="dbklima.advantage", verbose_name="Výhody"),
         ),
         migrations.AddField(
-            model_name='subgroup',
-            name='disadvantages',
-            field=models.ManyToManyField(to='dbklima.disadvantage', verbose_name='Nevýhody'),
+            model_name="subgroup",
+            name="disadvantages",
+            field=models.ManyToManyField(
+                to="dbklima.disadvantage", verbose_name="Nevýhody"
+            ),
         ),
     ]

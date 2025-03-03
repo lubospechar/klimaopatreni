@@ -212,6 +212,14 @@ class SubGroup(models.Model):
         verbose_name="Kategorie dopadu změny klimatu",
         on_delete=models.CASCADE,
         null=True,
+        related_name="tags",
+    )
+
+    other_tags = models.ManyToManyField(
+        TagDetail,
+        verbose_name="Vedlejší kategorie dopadu změny klimatu",
+        related_name="other_tags",
+        blank=True,
     )
 
     tag_desc = models.TextField(
